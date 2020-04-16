@@ -14,5 +14,14 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag justinclayton/webwebweb:$(date +%s)
+    - name: Build Docker Image
+      run: docker build . --file Dockerfile --tag justinclayton/webwebweb
+    - name: Publish To Docker Hub
+      uses: elgohr/Publish-Docker-Github-Action@2.14
+      with:
+        # The name of the image you would like to push
+        name: justinclayton/webwebweb
+        # The login username for the registry
+        username: ${{ secrets.DOCKER_USERNAME }}
+        # The login password for the registry
+        password: ${{ secrets.DOCKER_PASSWORD }}
